@@ -1,6 +1,7 @@
 import { instance } from "./instance"
 
-const token = 'c331525cb8c86b2d63e2bd7e2eda0968'
+
+const token = import.meta.env.VITE_API_KEY
 
 export async function getCurrentWeather(city='Puebla', ctry='mx') {
     try {
