@@ -1,0 +1,44 @@
+{
+    "coord": {
+      "lon": -98,
+      "lat": 18.8333
+    },
+    "weather": [
+      {
+        "id": 804,
+        "main": "Clouds",
+        "description": "overcast clouds",
+        "icon": "04d"
+      }
+    ],
+    "base": "stations",
+    "main": {
+      "temp": 294.98,
+      "feels_like": 294.13,
+      "temp_min": 294.98,
+      "temp_max": 294.98,
+      "pressure": 1014,
+      "humidity": 35,
+      "sea_level": 1014,
+      "grnd_level": 812
+    },
+    "visibility": 10000,
+    "wind": {
+      "speed": 1.16,
+      "deg": 346,
+      "gust": 4.45
+    },
+    "clouds": {
+      "all": 100
+    },
+    "dt": 1739996586,
+    "sys": {
+      "country": "MX",
+      "sunrise": 1739969865,
+      "sunset": 1740011650
+    },
+    "timezone": -21600,
+    "id": 3521082,
+    "name": "Puebla",
+    "cod": 200
+  }
