@@ -5,7 +5,7 @@ import { NavModal } from "./NavModal"
 export function TodayWeather() {
 
   const [data, setData] = useState(null)
-  console.log('clg de data', data);
+  // console.log('clgCurrent', data);
   useEffect(() => {
     getCurrentWeather()
       .then((response) => setData(response.data))
