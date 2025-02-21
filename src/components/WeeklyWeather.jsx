@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { getForecast } from "../libs/axios/weather"
 import { TemperatureScale } from "./TemperatureScale"
+import { getIcons } from "../libs/axios/weather"
 
 export function WeeklyWeather() {
 
@@ -39,7 +40,7 @@ export function WeeklyWeather() {
                   {index === 0 ? "Tomorrow" : formatDate(item.dt)}
                 </h3>
                 <span className="flex items-center justify-center w-14 h-16">
-                  <img src="./src/images/weather/03d.png" alt="" />
+                  <img src={getIcons(item.weather[0].icon)} alt={(item.weather[0].icon)} />
                 </span>
                 <div className=" flex gap-2 mt-2">
                   <p>{getCelcius(item.main.temp_max)}°C</p>

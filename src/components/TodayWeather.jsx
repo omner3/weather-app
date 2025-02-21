@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { getCurrentWeather } from "../libs/axios/weather";
+import { getIcons } from "../libs/axios/weather";
 import { NavModal } from "./NavModal"
 
 export function TodayWeather() {
 
   const [data, setData] = useState(null)
-  // console.log('clgCurrent', data);
+  console.log('clgCurrent', data);
   useEffect(() => {
     getCurrentWeather()
       .then((response) => setData(response.data))
@@ -30,7 +31,7 @@ export function TodayWeather() {
             />
           </div>
           <div className='absolute w-40 aspect-square'>
-            <img src="./src/images/weather/03d.png" alt="" />
+            <img src={getIcons(data?.weather[0].icon)} alt={(data?.weather[0].icon)} />
           </div>
         </div>
 
