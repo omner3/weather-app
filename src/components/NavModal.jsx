@@ -28,10 +28,10 @@ export function NavModal() {
         <span
           onClick={closeModal}
           className="absolute right-10 top-6 cursor-pointer">
-          <img src="./src/images/close.svg" alt="close search" className="w-7"/>
+          <img src="/images/close.svg" alt="close search" className="w-7"/>
         </span>
         <div className="flex items-center w-[55%] max-w-[268px] h-9 bg-transparent border border-[#E7E7EB]  font-medium text-base text-[#616475]">
-          <img src="./src/images/search.svg" alt="search icon" className="w-7 px-1" />
+          <img src="/images/search.svg" alt="search icon" className="w-7 px-1" />
           <input className="bg-transparent outline-none w-[233px] h-8 pr-1 " placeholder="search location" type="text"/>
         </div>
         <button
