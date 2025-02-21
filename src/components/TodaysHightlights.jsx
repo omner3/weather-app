@@ -37,7 +37,7 @@ export function TodaysHightlights() {
               </div>
               <div className="flex items-center text-[#E7E7EB] text-sm">
                 <span className="flex justify-center items-center w-8 h-8 m-3 rounded-full bg-[#ffffff4d]">
-                  <img src="./src/images/navigation.svg" alt="wind direction" className="w-4" />
+                  <img src="/images/navigation.svg" alt="wind direction" className="w-4" />
                 </span>
                 SE
               </div>

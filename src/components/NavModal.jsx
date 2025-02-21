@@ -18,7 +18,7 @@ export function NavModal() {
         <div
           className=" flex items-center justify-center w-10 h-10 bg-[#ffffff33] rounded-full cursor-pointer"
         >
-          <img src="./src/images/location.svg" alt="location" className='w-6' />
+          <img src="/images/location.svg" alt="location" className='w-6' />
         </div>
       </header>
       <section 

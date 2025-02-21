@@ -67,6 +67,6 @@ export function getIcons(weatherCode) {
         "50n": "50n.png"
     }
 
-    return `./src/images/weather/${iconMap[weatherCode]}`;
+    return `/images/weather/${iconMap[weatherCode]}`;
 
 }

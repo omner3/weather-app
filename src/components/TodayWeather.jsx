@@ -26,7 +26,7 @@ export function TodayWeather() {
         <div
           className='h-60 w-full overflow-x-hidden relative flex justify-center items-center overflow-hidden'>
           <div className='h-full absolute z-30 w-full -top-1/2 translate-y-1/2'>
-            <img src="./src/images/others/Cloud-background.png" alt="clouds background"
+            <img src="/images/others/Cloud-background.png" alt="clouds background"
               className='opacity-10 object-cover w-full h-full'
             />
           </div>
@@ -54,7 +54,7 @@ export function TodayWeather() {
         </p>
         <pre
           className="flex items-center gap-2 text-sm text-[#88869D] h-10  bottom-0 font-semibold mb-2">
-          <img src="./src/images/location_on.svg" alt="location on"
+          <img src="/images/location_on.svg" alt="location on"
             className="w-5"
           />
           {data?.name}
