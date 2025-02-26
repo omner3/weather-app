@@ -2,17 +2,28 @@ import { useEffect, useState } from "react";
 import { getCurrentWeather } from "../libs/axios/weather";
 import { getIcons } from "../libs/axios/weather";
 import { NavModal } from "./NavModal"
+import { useCity } from "../context/CityContext";
 
 export function TodayWeather() {
-
+  const { selectedCity } = useCity()
   const [data, setData] = useState(null)
-  console.log('clgCurrent', data);
-  useEffect(() => {
-    getCurrentWeather()
-      .then((response) => setData(response.data))
-      .catch((error) => console.error(error))
 
-  }, []);
+  /*prueba para saber si la seleccion de ciudad era correcta*
+
+    const handleSelectCity = (city) =>{
+    console.log("Ciudad seleccionada:", city)
+    setSelectedCity(city)
+  } */
+
+  // console.log('clgCurrent', data);
+  useEffect(() => {
+    if (selectedCity) {
+      getCurrentWeather(selectedCity.lat, selectedCity.lon)
+        .then((response) => setData(response.data))
+        .catch((error) => console.error(error))
+
+    }
+  }, [selectedCity]);
 
   function getCelcius(kelvin) {
     return (kelvin - 273.15).toFixed(0)

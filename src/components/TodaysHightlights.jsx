@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { getCurrentWeather } from "../libs/axios/weather";
+import { useCity } from "../context/CityContext";
 
 export function TodaysHightlights() {
 
+  const { selectedCity } = useCity()
   const [data, setData] = useState(null)
+
   useEffect(() => {
-    getCurrentWeather()
+    if (selectedCity) {
+      getCurrentWeather(selectedCity.lat, selectedCity.lon)
       .then((response) => setData(response.data))
       .catch((error) => console.error(error))
 
-  }, []);
+    } 
+  }, [selectedCity]);
 
   function getKm(m) {
     return (m / 1000).toFixed(2)
