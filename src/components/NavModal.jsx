@@ -1,11 +1,17 @@
 import { useState } from "react"
 import cities from "../static_Json/cities.json"
+import { useCity } from "../context/CityContext"
 
 export function NavModal({ onSelectCity }) {
+  const { setSelectedCity } = useCity()
   const [searchQuery, setSearchQuery] = useState("")
   const [filteredCities, setFilteredCities] = useState([])
+  const [isOpen, setIsOpen] = useState(false)
 
-  const handleSearch = (e) => {
+  const openModal = () => setIsOpen(true)
+  const closeModal = () => setIsOpen(false)
+
+  const handleSearch = () => {
     if (searchQuery.length > 2) {
       const filtered = cities.filter((city) =>
         city.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -19,16 +25,11 @@ export function NavModal({ onSelectCity }) {
   };
 
   const handleSelectCity = (city) => {
-    onSelectCity(city);
+    setSelectedCity(city);
     setSearchQuery("");
     setFilteredCities([])
+    closeModal()
   }
-
-  const [isOpen, setIsOpen] = useState(false)
-
-  const openModal = () => setIsOpen(true)
-  const closeModal = () => setIsOpen(false)
-
 
   return (
     <>
@@ -70,7 +71,7 @@ export function NavModal({ onSelectCity }) {
             Search
           </button>
         </nav>
-        <div className="mt-4 px-5">
+        <div className="mt-1 px-5">
           {filteredCities.map((city) => (
             <div
               key={city.id}

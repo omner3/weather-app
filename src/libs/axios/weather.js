@@ -3,18 +3,18 @@ import { instance } from "./instance"
 
 const token = import.meta.env.VITE_API_KEY
 
-export async function getCurrentWeather(city = 'Puebla', ctry = 'mx') {
+export async function getCurrentWeather(lat, lon) {
     try {
-        const { status, data } = await instance.get(`weather?q=${city},${ctry}&APPID=${token}`)
+        const { status, data } = await instance.get(`weather?lat=${lat}&lon=${lon}&appid=${token}`)
         return { status, data }
     } catch (error) {
         throw error
     }
 }
 
-export async function getForecast(city = 'Puebla') {
+export async function getForecast(lat, lon) {
     try {
-        const { status, data } = await instance.get(`forecast?q=${city}&appid=${token}`)
+        const { status, data } = await instance.get(`forecast?lat=${lat}&lon=${lon}&appid=${token}`)
         // console.log(data.list)
         const result = []
 

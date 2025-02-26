@@ -2,17 +2,21 @@ import { useState, useEffect } from "react"
 import { getForecast } from "../libs/axios/weather"
 import { TemperatureScale } from "./TemperatureScale"
 import { getIcons } from "../libs/axios/weather"
+import { useCity } from "../context/CityContext"
 
 export function WeeklyWeather() {
 
+  const { selectedCity } = useCity()
   const [data, setData] = useState(null)
   // console.log('clgForecast', data);
   useEffect(() => {
-    getForecast()
+    if (selectedCity) {
+      getForecast(selectedCity.lat, selectedCity.lon)
       .then((response) => setData(response.result))
       .catch((error) => console.error(error))
 
-  }, []);
+    }
+  }, [selectedCity]);
 
   const formatDate = (timestamp) => {
     const date = new Date(timestamp * 1000);

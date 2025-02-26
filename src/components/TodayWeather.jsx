@@ -2,23 +2,28 @@ import { useEffect, useState } from "react";
 import { getCurrentWeather } from "../libs/axios/weather";
 import { getIcons } from "../libs/axios/weather";
 import { NavModal } from "./NavModal"
+import { useCity } from "../context/CityContext";
 
 export function TodayWeather() {
-  const [selectedCity, setSelectedCity] = useState(null)
+  const { selectedCity } = useCity()
+  const [data, setData] = useState(null)
 
-  const handleSelectCity = (city) =>{
+  /*prueba para saber si la seleccion de ciudad era correcta*
+
+    const handleSelectCity = (city) =>{
     console.log("Ciudad seleccionada:", city)
     setSelectedCity(city)
-  }
+  } */
 
-  const [data, setData] = useState(null)
   // console.log('clgCurrent', data);
   useEffect(() => {
-    getCurrentWeather()
-      .then((response) => setData(response.data))
-      .catch((error) => console.error(error))
+    if (selectedCity) {
+      getCurrentWeather(selectedCity.lat, selectedCity.lon)
+        .then((response) => setData(response.data))
+        .catch((error) => console.error(error))
 
-  }, []);
+    }
+  }, [selectedCity]);
 
   function getCelcius(kelvin) {
     return (kelvin - 273.15).toFixed(0)
@@ -26,7 +31,7 @@ export function TodayWeather() {
 
   return (
     <div className='bg-[#1e213a] w-screen h-screen md:w-[30%] xl:h-[740px] 2xl:h-screen'>
-      <NavModal onSelectCity={handleSelectCity} />
+      <NavModal />
       <div className='flex flex-col items-center w-full h-[90vh]'>
 
         <div
