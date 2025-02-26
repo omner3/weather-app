@@ -4,9 +4,15 @@ import { getIcons } from "../libs/axios/weather";
 import { NavModal } from "./NavModal"
 
 export function TodayWeather() {
+  const [selectedCity, setSelectedCity] = useState(null)
+
+  const handleSelectCity = (city) =>{
+    console.log("Ciudad seleccionada:", city)
+    setSelectedCity(city)
+  }
 
   const [data, setData] = useState(null)
-  console.log('clgCurrent', data);
+  // console.log('clgCurrent', data);
   useEffect(() => {
     getCurrentWeather()
       .then((response) => setData(response.data))
@@ -20,7 +26,7 @@ export function TodayWeather() {
 
   return (
     <div className='bg-[#1e213a] w-screen h-screen md:w-[30%] xl:h-[740px] 2xl:h-screen'>
-      <NavModal />
+      <NavModal onSelectCity={handleSelectCity} />
       <div className='flex flex-col items-center w-full h-[90vh]'>
 
         <div
