@@ -3,10 +3,12 @@ import { getCurrentWeather } from "../libs/axios/weather";
 import { getIcons } from "../libs/axios/weather";
 import { NavModal } from "./NavModal"
 import { useCity } from "../context/CityContext";
+import { useScale } from "../context/ScaleContext";
 
 export function TodayWeather() {
   const { selectedCity } = useCity()
   const [data, setData] = useState(null)
+  const { scale } = useScale()
 
   /*prueba para saber si la seleccion de ciudad era correcta*
 
@@ -25,8 +27,12 @@ export function TodayWeather() {
     }
   }, [selectedCity]);
 
-  function getCelcius(kelvin) {
-    return (kelvin - 273.15).toFixed(0)
+  const getTemperature = (kelvin) => {
+    if (scale === "celsius") {
+      return (kelvin - 273.15).toFixed(0)
+    } else {
+      return (((kelvin - 273.15) * 9) / 5 + 32).toFixed(0)
+    }
   }
 
   return (
@@ -47,8 +53,12 @@ export function TodayWeather() {
         </div>
 
         <div className='flex items-center'>
-          <h2 className="text-9xl text-[#E7E7EB] my-8">{getCelcius(data?.main?.temp)}</h2>
-          <h3 className="mt-6 text-6xl text-[#A09FB1] font-medium">°C</h3>
+          <h2 className="text-9xl text-[#E7E7EB] my-8">
+            {getTemperature(data?.main?.temp)}
+          </h2>
+          <h3 className="mt-6 text-6xl text-[#A09FB1] font-medium">
+            {scale === "celsius" ? "°C" : "°F"}
+          </h3>
         </div>
         <h2
           className="capitalize pt-6 pb-12 text-3xl text-[#A09FB1] font-semibold"

@@ -3,9 +3,10 @@ import { getForecast } from "../libs/axios/weather"
 import { TemperatureScale } from "./TemperatureScale"
 import { getIcons } from "../libs/axios/weather"
 import { useCity } from "../context/CityContext"
+import { useScale } from "../context/ScaleContext"
 
 export function WeeklyWeather() {
-
+  const { scale } = useScale()
   const { selectedCity } = useCity()
   const [data, setData] = useState(null)
   // console.log('clgForecast', data);
@@ -24,8 +25,12 @@ export function WeeklyWeather() {
     return date.toLocaleDateString("en-US", options);
   };
 
-  function getCelcius(kelvin) {
-    return (kelvin - 273.15).toFixed(0)
+  const getTemperature = (kelvin) => {
+    if (scale === "celsius") {
+      return (kelvin - 273.15).toFixed(0)
+    } else {
+      return (((kelvin - 273.15) * 9) / 5 + 32).toFixed(0)
+    }
   }
 
 
@@ -47,9 +52,9 @@ export function WeeklyWeather() {
                   <img src={getIcons(item.weather[0].icon)} alt={(item.weather[0].icon)} />
                 </span>
                 <div className=" flex gap-2 mt-2">
-                  <p>{getCelcius(item.main.temp_max)}°C</p>
+                  <p>{getTemperature(item.main.temp_max)}{scale === "celsius" ? "°C" : "°F"}</p>
                   <p className="text-[#A09FB1]">
-                  {getCelcius(item.main.temp_min)}°C
+                  {getTemperature(item.main.temp_min)}{scale === "celsius" ? "°C" : "°F"}
                   </p>
                 </div>
               </li>

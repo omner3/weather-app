@@ -2,7 +2,7 @@ import { useState } from "react"
 import cities from "../static_Json/cities.json"
 import { useCity } from "../context/CityContext"
 
-export function NavModal({ onSelectCity }) {
+export function NavModal() {
   const { setSelectedCity } = useCity()
   const [searchQuery, setSearchQuery] = useState("")
   const [filteredCities, setFilteredCities] = useState([])
@@ -22,7 +22,7 @@ export function NavModal({ onSelectCity }) {
     } else {
       setFilteredCities([]);
     }
-  };
+  }
 
   const handleSelectCity = (city) => {
     setSelectedCity(city);
@@ -30,6 +30,29 @@ export function NavModal({ onSelectCity }) {
     setFilteredCities([])
     closeModal()
   }
+
+  function success(position) {
+    const { latitude, longitude } = position.coords
+
+    const userLocation = {
+      name: "Your Location",
+      lat: latitude,
+      lon: longitude,
+      country: "Unknown",
+      country_code: "LOC",
+    }
+    setSelectedCity(userLocation)
+  }
+  
+  function error() {
+    console.error("Sorry, no position available.");
+  }
+  
+  const options = {
+    enableHighAccuracy: true,
+    maximumAge: 30000,
+    timeout: 27000,
+  };
 
   return (
     <>
@@ -41,6 +64,7 @@ export function NavModal({ onSelectCity }) {
         </button>
         <div
           className=" flex items-center justify-center w-10 h-10 bg-[#ffffff33] rounded-full cursor-pointer"
+          onClick={() => navigator.geolocation.getCurrentPosition(success, error, options)}
         >
           <img src="/images/location.svg" alt="location" className='w-6' />
         </div>
