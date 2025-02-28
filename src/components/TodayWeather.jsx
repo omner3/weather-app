@@ -17,7 +17,7 @@ export function TodayWeather() {
     setSelectedCity(city)
   } */
 
-  // console.log('clgCurrent', data);
+  console.log('clgCurrent', data);
   useEffect(() => {
     if (selectedCity) {
       getCurrentWeather(selectedCity.lat, selectedCity.lon)
